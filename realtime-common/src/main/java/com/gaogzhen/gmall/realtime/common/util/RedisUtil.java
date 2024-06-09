@@ -2,11 +2,13 @@ package com.gaogzhen.gmall.realtime.common.util;
 
 import com.gaogzhen.gmall.realtime.common.constant.Constant;
 import io.lettuce.core.RedisClient;
+import io.lettuce.core.RedisURI;
 import io.lettuce.core.api.StatefulRedisConnection;
 import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
+import redis.clients.jedis.Protocol;
 
 /**
  * @author yhm
@@ -27,7 +29,7 @@ public class RedisUtil {
 
         config.setMaxWaitMillis(10 * 1000);
 
-        pool = new JedisPool(config, "hadoop103", 6379);
+        pool = new JedisPool(config, "node2231", 6379, Protocol.DEFAULT_TIMEOUT, "redis@G2ZH");
     }
 
     public static Jedis getJedis() {
@@ -46,7 +48,13 @@ public class RedisUtil {
     }
 
     public static StatefulRedisConnection<String, String> getRedisAsyncConnection() {
-        RedisClient redisClient = RedisClient.create("redis://hadoop103:6379/4");
+        RedisURI redisURI = RedisURI.builder()
+                .withHost("node2231")
+                .withPort(6379)
+                .withDatabase(4)
+                .withAuthentication("default", "123456")
+                .build();
+        RedisClient redisClient = RedisClient.create(redisURI);
         return redisClient.connect();
     }
 

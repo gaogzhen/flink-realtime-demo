@@ -29,7 +29,7 @@ public class Constant {
     public static final String FENODES = "node1:7030";
     public static final String DORIS_DATABASE = "gmall2023_realtime";
     public static final String DORIS_USERNAME = "root";
-    public static final String DORIS_PASSWORD = "aaaaaa";
+    public static final String DORIS_PASSWORD = "doris@G2ZH";
 
 
     public static final String DWS_TRAFFIC_SOURCE_KEYWORD_PAGE_VIEW_WINDOW = "dws_traffic_source_keyword_page_view_window";
